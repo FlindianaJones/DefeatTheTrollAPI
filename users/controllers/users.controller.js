@@ -2,8 +2,8 @@ const UserModel = require('./../models/users.model')
 const crypto = require('crypto')
 
 const insert = (req, res) => {
-  let salt = crypto.randomBytes(16).toString('base64')
-  let hash = crypto.createHmac('sha512', salt)
+  const salt = crypto.randomBytes(16).toString('base64')
+  const hash = crypto.createHmac('sha512', salt)
     .update(req.body.password)
     .digest('base64')
   req.body.password = salt + '$' + hash
@@ -12,8 +12,8 @@ const insert = (req, res) => {
     .then((result) => {
       res.status(201).send({ id: result._id })
     }).catch(reason => {
-    res.status(500).send(JSON.stringify(reason))
-  })
+      res.status(500).send(JSON.stringify(reason))
+    })
 }
 
 const getById = (req, res) => {
@@ -24,17 +24,17 @@ const getById = (req, res) => {
 
 const patchById = (req, res) => {
   if (req.body.password) {
-    let salt = crypto.randomBytes(16).toString('base64')
-    let hash = crypto.createHmac('sha512', salt).update(req.body.password).digest('base64')
+    const salt = crypto.randomBytes(16).toString('base64')
+    const hash = crypto.createHmac('sha512', salt).update(req.body.password).digest('base64')
     req.body.password = salt + '$' + hash
   }
-  UserModel.patchUser(req.params.userId, req.body).then((result) => {
+  UserModel.patchUser(req.params.userId, req.body).then(() => {
     res.status(204).send({})
   })
 }
 
 const list = (req, res) => {
-  let limit = req.query.limit && req.query.limit <= 100 ? parseInt(req.query.limit) : 10
+  const limit = req.query.limit && req.query.limit <= 100 ? parseInt(req.query.limit) : 10
   let page = 0
   if (req.query) {
     if (req.query.page) {
@@ -49,7 +49,7 @@ const list = (req, res) => {
 
 const removeById = (req, res) => {
   UserModel.removeById(req.params.userId)
-    .then((result) => {
+    .then(() => {
       res.status(204).send({})
     })
 }

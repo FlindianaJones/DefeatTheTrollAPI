@@ -6,7 +6,7 @@ const router = express.Router()
 router.get('/', controller.list)
 
 /* GET retrieve user details. */
-router.get('/:userId',  controller.getById);
+router.get('/:userId', controller.getById)
 
 /* POST create new user */
 router.post('/', controller.insert)
@@ -17,4 +17,4 @@ router.patch('/:userId', controller.patchById)
 /* DELETE remove  user */
 router.delete('/:userId', controller.removeById)
 
-module.exports = router;
+module.exports = router

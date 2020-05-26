@@ -8,17 +8,17 @@ const userSchema = new mongoose.Schema({
   permissionLevel: Number
 })
 
-const userModel = mongoose.model('Users', userSchema)
+const UserModel = mongoose.model('Users', userSchema)
 
 const createUser = (userData) => {
   console.log('Got user: ' + JSON.stringify(userData))
-  const user = new userModel(userData)
+  const user = new UserModel(userData)
   console.log('Saving ' + JSON.stringify(user))
   return user.save()
 }
 
 const findById = (id) => {
-  return userModel.findById(id).then((result) => {
+  return UserModel.findById(id).then((result) => {
     result = result.toJSON()
     delete result._id
     delete result.__v
@@ -27,7 +27,7 @@ const findById = (id) => {
 }
 
 const findByEmail = (email) => {
-  return userModel.findOne({ email: email }).then((result) => {
+  return UserModel.findOne({ email: email }).then((result) => {
     result = result.toJSON()
     delete result._id
     delete result.__v
@@ -37,9 +37,9 @@ const findByEmail = (email) => {
 
 const patchUser = (id, userData) => {
   return new Promise((resolve, reject) => {
-    userModel.findById(id, function (err, user) {
+    UserModel.findById(id, function (err, user) {
       if (err) reject(err)
-      for (let i in userData) {
+      for (const i in userData) {
         user[i] = userData[i]
       }
       user.save(function (err, updatedUser) {
@@ -52,7 +52,7 @@ const patchUser = (id, userData) => {
 
 const list = (perPage, page) => {
   return new Promise((resolve, reject) => {
-    userModel.find()
+    UserModel.find()
       .limit(perPage)
       .skip(perPage * page)
       .exec(function (err, users) {
@@ -67,7 +67,7 @@ const list = (perPage, page) => {
 
 const removeById = (userId) => {
   return new Promise((resolve, reject) => {
-    userModel.remove({ _id: userId }, (err) => {
+    UserModel.remove({ _id: userId }, (err) => {
       if (err) {
         reject(err)
       } else {

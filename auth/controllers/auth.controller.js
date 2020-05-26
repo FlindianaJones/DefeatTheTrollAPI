@@ -6,14 +6,14 @@ const jwtSecret = process.env.JWT_SECRET
 
 const login = (req, res) => {
   try {
-    let refreshId = req.body.userId + jwtSecret
-    let salt = crypto.randomBytes(16).toString('base64')
-    let hash = crypto.createHmac('sha512', salt).update(refreshId).digest('base64')
+    const refreshId = req.body.userId + jwtSecret
+    const salt = crypto.randomBytes(16).toString('base64')
+    const hash = crypto.createHmac('sha512', salt).update(refreshId).digest('base64')
     req.body.refreshKey = salt
-    let token = jwt.sign(req.body, jwtSecret)
-    let b = new Buffer(hash)
-    let refresh_token = b.toString('base64')
-    res.status(201).send({ accessToken: token, refreshToken: refresh_token })
+    const token = jwt.sign(req.body, jwtSecret)
+    const b = new Buffer(hash)
+    const refreshToken = b.toString('base64')
+    res.status(201).send({ accessToken: token, refreshToken: refreshToken })
   } catch (err) {
     res.status(500).send({ errors: err })
   }
