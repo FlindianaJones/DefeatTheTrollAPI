@@ -4,4 +4,6 @@ const AuthorizationController = require('../auth/controllers/auth.controller')
 const VerifyUserMiddleware = require('../auth/middlewares/verify.user.middleware')
 
 /* GET users listing. */
-router.post('/auth', VerifyUserMiddleware.isPasswordAndUserMatch, AuthorizationController.login)
+router.post('/', VerifyUserMiddleware.isPasswordAndUserMatch, AuthorizationController.login)
+
+module.exports = router

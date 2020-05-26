@@ -27,9 +27,12 @@ const findById = (id) => {
 }
 
 const findByEmail = (email) => {
-  return UserModel.findOne({ email: email }).then((result) => {
-    result = result.toJSON()
-    delete result._id
+  return UserModel.find({ email: email }).then((result) => {
+    if (!result) {
+      return {}
+    }
+    console.log(result)
+    result = result[0]
     delete result.__v
     return result
   })
