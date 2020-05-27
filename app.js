@@ -1,6 +1,7 @@
 const express = require('express')
 const usersRouter = require('./routes/users')
 const authRouter = require('./routes/auth')
+const feedbackRouter = require('./routes/feedback')
 const mongoose = require('mongoose')
 
 // App constants
@@ -18,6 +19,7 @@ const db = mongoose.connection
 // Routing/binding
 app.use('/users', usersRouter)
 app.use('/auth', authRouter)
+app.use('/feedback', feedbackRouter)
 
 db.on('error', console.error.bind(console, 'MongoDB connection error:'))
 
