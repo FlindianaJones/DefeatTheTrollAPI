@@ -3,11 +3,12 @@ const usersRouter = require('./routes/users')
 const authRouter = require('./routes/auth')
 const feedbackRouter = require('./routes/feedback')
 const mongoose = require('mongoose')
+require('custom-env').env()
 
 // App constants
 const port = 8941
 const app = express()
-const mongoDB = 'mongodb://127.0.0.1/troll_db'
+const mongoDB = process.env.MONGODB_URI
 
 // Server config
 app.use(express.json())
