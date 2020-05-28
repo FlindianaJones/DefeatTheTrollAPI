@@ -6,7 +6,6 @@ const mongoose = require('mongoose')
 require('custom-env').env()
 
 // App constants
-const port = process.env.HOST_PORT ? process.env.PORT : 8080
 const app = express()
 const mongoDB = process.env.MONGODB_URI
 
@@ -25,5 +24,5 @@ app.use('/feedback', feedbackRouter)
 db.on('error', console.error.bind(console, 'MongoDB connection error:'))
 
 // Finally, HEY! LISTEN!
-const server = app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
+const server = app.listen(process.env.PORT || 9841, () => console.log(`Example app listening at http://localhost:${port}`))
 server.timeoutSeconds = 10
