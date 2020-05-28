@@ -12,6 +12,9 @@
     "url": "git+https://github.com/FlindianaJones/DefeatTheTrollAPI.git"
   },
   "author": "Flynn Burklin",
+  "engines": {
+    "node": "14.x"
+  },
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/FlindianaJones/DefeatTheTrollAPI/issues"
