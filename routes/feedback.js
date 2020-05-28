@@ -8,6 +8,6 @@ const router = express.Router()
 /* POST create new feedback item */
 router.post('/', auth.validJWTNeeded, auth.minimumPermissionLevelRequired(POST_FEEDBACK), controller.insert)
 
-router.get('/', (req, res) => { res.status(200).send(`${new Date()}: pong!`) })
+router.get('/ping', (req, res) => { res.status(200).send(`${new Date()}: pong!`) })
 
 module.exports = router

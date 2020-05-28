@@ -6,7 +6,7 @@ const mongoose = require('mongoose')
 require('custom-env').env()
 
 // App constants
-const port = 8941
+const port = process.env.HOST_PORT ? process.env.HOST_PORT : 80
 const app = express()
 const mongoDB = process.env.MONGODB_URI
 
