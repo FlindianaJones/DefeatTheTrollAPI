@@ -25,4 +25,5 @@ app.use('/feedback', feedbackRouter)
 db.on('error', console.error.bind(console, 'MongoDB connection error:'))
 
 // Finally, HEY! LISTEN!
-app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
+const server = app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
+server.timeoutSeconds = 10
