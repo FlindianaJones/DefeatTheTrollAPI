@@ -13,7 +13,7 @@ const login = (req, res) => {
     const token = jwt.sign(req.body, jwtSecret)
     const b = new Buffer(hash)
     const refreshToken = b.toString('base64')
-    res.status(201).send({ accessToken: token, refreshToken: refreshToken })
+    res.status(200).send({ accessToken: token, refreshToken: refreshToken })
   } catch (err) {
     res.status(500).send({ errors: err })
   }
