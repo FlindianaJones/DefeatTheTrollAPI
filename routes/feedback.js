@@ -1,4 +1,4 @@
-const { POST_FEEDBACK } = require('../constants')
+const { POST_FEEDBACK, LIST_FEEDBACK } = require('../constants')
 
 const express = require('express')
 const controller = require('../feedback/controllers/feedback.controller')
@@ -9,7 +9,7 @@ const router = express.Router()
 /* POST create new feedback item */
 router.post('/', log, auth.validJWTNeeded, auth.minimumPermissionLevelRequired(POST_FEEDBACK), controller.insert)
 
-router.get('/', log, auth.validJWTNeeded, auth.minimumPermissionLevelRequired(), controller.list)
+router.get('/', log, auth.validJWTNeeded, auth.minimumPermissionLevelRequired(LIST_FEEDBACK), controller.list)
 
 router.get('/ping', log, (req, res) => { res.status(200).send(`${new Date()}: pong!`) })
 

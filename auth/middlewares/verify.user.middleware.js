@@ -56,6 +56,7 @@ const minimumPermissionLevelRequired = (requiredPermissionLevel) => {
     if (userPermissionLevel & requiredPermissionLevel) {
       return next()
     } else {
+      console.log(`You absolute fool, you have ${userPermissionLevel} and needed ${requiredPermissionLevel}!`)
       return res.status(403).send()
     }
   }
