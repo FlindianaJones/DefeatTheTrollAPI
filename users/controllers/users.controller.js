@@ -1,4 +1,5 @@
 const UserModel = require('./../models/users.model')
+const {POST_FEEDBACK, USER_EDIT, LIST_FEEDBACK} = require('./../../constants')
 const crypto = require('crypto')
 
 const insert = (req, res) => {
@@ -7,7 +8,7 @@ const insert = (req, res) => {
     .update(req.body.password)
     .digest('base64')
   req.body.password = salt + '$' + hash
-  req.body.permissionLevel = 1
+  req.body.permissionLevel = 0 | POST_FEEDBACK | USER_EDIT | LIST_FEEDBACK
   UserModel.createUser(req.body)
     .then((result) => {
       res.status(201).send({ id: result._id })
