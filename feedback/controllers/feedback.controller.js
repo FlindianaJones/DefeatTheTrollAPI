@@ -17,6 +17,7 @@ const insert = (req, res) => {
     })
 }
 
+// TODO: Gotta populate the user names up in here
 const list = (req, res) => {
   const limit = req.query.limit && req.query.limit <= 100 ? parseInt(req.query.limit) : 10
   let page = 0

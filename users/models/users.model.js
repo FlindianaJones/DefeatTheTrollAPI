@@ -31,9 +31,9 @@ const findByEmail = (email) => {
     if (!result) {
       return {}
     }
-    console.log(result)
     result = result[0]
     delete result.__v
+    delete result.password
     return result
   })
 }
@@ -62,7 +62,14 @@ const list = (perPage, page) => {
         if (err) {
           reject(err)
         } else {
-          resolve(users)
+          const cleanedUsers = users.map(v => {
+            // Can't modify v, for some reason, so clone then return after editing
+            const userClone = JSON.parse(JSON.stringify(v))
+            delete userClone.__v
+            delete userClone.password
+            return userClone
+          })
+          resolve(cleanedUsers)
         }
       })
   })
