@@ -12,12 +12,11 @@ const insert = (req, res) => {
   FeedbackModel.postFeedback(req.body)
     .then((result) => {
       res.status(201).send({ id: result._id })
-    }).catch(reason => {
-      res.status(500).send(JSON.stringify(reason))
-    })
+    }).catch(e => {
+    res.status(500).send(e.message)
+  })
 }
 
-// TODO: Gotta populate the user names up in here
 const list = (req, res) => {
   const limit = req.query.limit && req.query.limit <= 100 ? parseInt(req.query.limit) : 10
   let page = 0
@@ -29,7 +28,29 @@ const list = (req, res) => {
   }
   FeedbackModel.list(limit, page).then((result) => {
     res.status(200).send(result)
+  }).catch((e) => {
+    res.status(500).send(e.message)
   })
 }
 
-module.exports = { insert, list }
+const doot = (req, res) => {
+  if (!req.body || !req.body.id || req.body.updoot === undefined) {
+    res.status(400).send('Malformed request, missing required fields')
+  }
+
+  if (req.body.updoot) {
+    FeedbackModel.updoot(req.body.id).then(() => {
+      res.status(200).send('Successful Updoot!')
+    }).catch(e => {
+      res.status(500).send(e.message)
+    })
+  } else {
+    FeedbackModel.downdoot(req.body.id).then(() => {
+      res.status(200).send('Successful Downdoot')
+    }).catch(e => {
+      res.status(500).send(e.message)
+    })
+  }
+}
+
+module.exports = { insert, list, doot }

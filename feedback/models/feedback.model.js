@@ -15,6 +15,18 @@ const postFeedback = (feedbackData) => {
   return feedback.save()
 }
 
+const findFeedback = (id) => {
+  return new Promise((resolve, reject) => {
+    FeedbackModel.findById(id, (err, feedback) => {
+      if (err) {
+        reject(err)
+      } else {
+        resolve(feedback)
+      }
+    })
+  })
+}
+
 const listFeedback = (perPage, page) => {
   return new Promise((resolve, reject) => {
     FeedbackModel.find()
@@ -44,6 +56,32 @@ const listFeedback = (perPage, page) => {
   })
 }
 
+const updoot = (id) => {
+  return new Promise((resolve, reject) => {
+    findFeedback(id).then((f) => {
+      FeedbackModel.findByIdAndUpdate(id, { rating: f.rating + 1 }, { useFindAndModify: false }, (err) => {
+        if (err) {
+          reject(err)
+        }
+        resolve()
+      })
+    }).catch((e) => { reject(e) })
+  })
+}
+
+const downdoot = (id) => {
+  return new Promise((resolve, reject) => {
+    findFeedback(id).then((f) => {
+      FeedbackModel.findByIdAndUpdate(id, { rating: f.rating - 1 }, { useFindAndModify: false }, (err) => {
+        if (err) {
+          reject(err)
+        }
+        resolve()
+      })
+    }).catch((e) => { reject(e) })
+  })
+}
+
 const FeedbackModel = mongoose.model('Feedback', feedbackSchema)
 
-module.exports = { FeedbackModel, postFeedback, list: listFeedback }
+module.exports = { FeedbackModel, postFeedback, list: listFeedback, updoot, downdoot }
