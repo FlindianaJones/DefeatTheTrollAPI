@@ -11,7 +11,7 @@ const login = (req, res) => {
     const hash = crypto.createHmac('sha512', salt).update(refreshId).digest('base64')
     req.body.refreshKey = salt
     const token = jwt.sign(req.body, jwtSecret)
-    const b = new Buffer(hash)
+    const b = Buffer.from(hash)
     const refreshToken = b.toString('base64')
     res.status(200).send({ accessToken: token, refreshToken: refreshToken })
   } catch (err) {

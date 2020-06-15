@@ -28,6 +28,8 @@ const isPasswordAndUserMatch = (req, res, next) => {
           return res.status(400).send({ errors: ['Invalid email or password'] })
         }
       }
+    }).catch(e => {
+      return res.status(400).send({ errors: ['Invalid email or password'] })
     })
 }
 
