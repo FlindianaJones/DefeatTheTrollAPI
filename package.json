@@ -13,7 +13,7 @@
   },
   "author": "Flynn Burklin",
   "engines": {
-    "node": "14.x"
+    "node": "15.x"
   },
   "license": "ISC",
   "bugs": {
@@ -27,9 +27,9 @@
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.26.0",
     "moment-timezone": "^0.5.31",
-    "mongoose": "^5.9.15",
-    "node-uuid": "^1.4.8",
+    "mongoose": "^5.12.13",
     "swagger-ui-express": "^4.1.4",
-    "sync-request": "^6.1.0"
+    "sync-request": "^6.1.0",
+    "uuid": "^8.3.2"
   }
 }
